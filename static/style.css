@@ -1,0 +1,51 @@
+body {
+    background-image: url('./img/cat-4876360_1920.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.chat-container {
+    width: 500px;
+    height: 300px;
+    background-color: #f0f0f0;
+    margin: 0 auto;
+    margin-top: 300px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.content {
+    margin: auto;
+    overflow-y: auto;
+    width: 450px;
+    height: calc(100% - 30px);
+    max-height: calc(100% - 30px);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between; /* Align items to the end (bottom) of the container */
+    align-items: center;
+    background-color: #2f3338; /* Example background color */
+    border-top: 1px solid #ccc; /* Optional border between content and footer */
+    border-radius: 20px;
+}
+
+.footer input[type="text"],
+.footer button {
+    flex: 4; /* Allow the items to grow equally to fill the available space */
+    padding: 3px;
+    margin-top: 4px; /* Optional margin between the items */
+    margin-bottom: 4px;
+    margin-left: 15px;
+    box-sizing: border-box;
+    /* Include padding and border in the total width */
+}
+
+.footer button {
+    flex: 1;
+    padding: 3px;
+    margin-right: 15px;
+    box-sizing: border-box;
+}

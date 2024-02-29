@@ -3,13 +3,23 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Flask App</title>
+
+        <link rel="stylesheet" href="../static/style.css">
         <script src="../static/chat.js" defer> </script>
+        <title>AFTER LIFE</title>
     </head>
+
     <body>
-        <input type="text" id="messageInput">
-        <button onclick="sendMessage()">Send Message</button>
-    
-        <ul id="messages"></ul>
+        <div class="chat-container">
+            <!-- Your content here -->
+            <div class="content">
+                <p id="messages"></p>
+            </div>
+
+            <div class="footer">
+                <input type="text" id="messageInput">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
     </body>
 </html>
