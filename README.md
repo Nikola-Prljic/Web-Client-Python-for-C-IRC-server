@@ -1,0 +1,3 @@
+Web client in JS and python for my 42 IRC Server
+
+work in progress...
