@@ -1,18 +1,14 @@
-const socket = new WebSocket('ws://localhost:8765');
-
-socket.addEventListener('open', function (event) {
-    console.log('WebSocket connection established.');
-});
-
-socket.addEventListener('message', function (event) {
-    console.log('Received message:', event.data);
-    const li = document.createElement('li');
-    li.textContent = event.data;
-    document.getElementById('messages').appendChild(li);
-});
+var socket = io.connect('http://localhost:5000');
 
 function sendMessage() {
-    const message = document.getElementById('messageInput').value;
-    socket.send(message);
-    document.getElementById('messageInput').value = '';
+    var message = document.getElementById('messageInput').value;
+    socket.emit('message_to_flask', message);
+    document.getElementById('messages').innerText += message + '\n';
 }
+
+socket.on('js_event', function(data) {
+    str = data.data;
+    if(str === "ping\r\n")
+        return;
+    document.getElementById('messages').innerText += str;
+});
