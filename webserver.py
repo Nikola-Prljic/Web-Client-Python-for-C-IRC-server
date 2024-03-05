@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
-
 import socket, threading
+from client.split_msg import splitMsg
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
@@ -19,29 +19,23 @@ def handle_message(message):
     print('Received message from HTML:', message)
     send_message_to_tcp_server(message)
 
-def send_message_to_tcp_server(message):
+def send_message_to_tcp_server(message:str):
     message += "\n"
     try:
         sock.sendall(message.encode())
     except socket.error as e:
         print("Socket error:", e)
 
-def handelData(data):
-    str = data.decode()
-    str = str.split(":")
-    print(str)
-    if len(str) == 2:
-        return str[1]
-    return str[2]
-
 @socketio.on('trigger_event')
 def recvMsg():
+    splitMsgObj = splitMsg()
     while True:
         data = sock.recv(1024)
         if len(data) == 0:
             return
-        print("recev from irc: ", data.decode(), end="")
-        str = handelData(data)
+        #print("recev from irc: ", data.decode(), end="")
+        str = splitMsgObj.handelData(data)
+        print("send to java = ", str)
         socketio.emit('js_event', {'data': str})
 
 if __name__ == '__main__':
@@ -49,5 +43,5 @@ if __name__ == '__main__':
     t = threading.Thread(target=recvMsg)
     t.daemon = True
     t.start()
-    socketio.run(app)
+    socketio.run(app, use_reloader=True, log_output=True)
     sock.close()

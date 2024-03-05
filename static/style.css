@@ -17,10 +17,10 @@ body {
 
 .content {
     margin: auto;
-    overflow-y: auto;
+    overflow-y: scroll;
     width: 450px;
-    height: calc(100% - 30px);
-    max-height: calc(100% - 30px);
+    height: calc(100%);
+    max-height: calc(87%);
 }
 
 .footer {
