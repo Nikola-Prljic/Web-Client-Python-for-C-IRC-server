@@ -1,7 +1,7 @@
 class splitMsg:
 
-    def __init__(self):
-        return
+    def __init__(self, msg):
+        self.msg = msg
     
     def handelJoin(self, args:str):
         if len(args[0]) < 2:
@@ -12,10 +12,8 @@ class splitMsg:
         args = args[0].split(" ")
         return "You joined " + args[2] + "\n"
 
-    def handelData(self, data):
-        msg = str(data.decode())
-        msg = list(msg.split(":"))
-
+    def handelData(self):
+        msg = list(self.msg.decode().split(":"))
         if msg[0] == "":
             msg.remove(msg[0])
         print(msg)

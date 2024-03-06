@@ -1,19 +1,27 @@
-var socket = io.connect('http://localhost:5000');
+const socket = new WebSocket('ws://localhost:8765'); // Connect to the WebSocket server
 
 function scrollTextboxToBottom() {
     var chatContainer = document.querySelector('.content');
     chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
+// Send a message to the WebSocket server when a button is clicked
+
 function sendMessage() {
-    var message = document.getElementById('messageInput').value;
+    message = document.getElementById('messageInput').value;
     if (message === "")
-        return
-    socket.emit('message_to_flask', message);
-    document.getElementById('messages').innerText += message + '\n';
+        return;
+    socket.send(message);
+    /* document.getElementById('messages').style.textAlign = "left"; */
+    var wrappedMessage = wrapLongMessage(message);
+    document.getElementById('messages').innerHTML += '<span style="display: block; text-align: right; ">' + wrappedMessage + '</span>';
     scrollTextboxToBottom()
     messageInput.value = '';
 }
+
+document.getElementById('sendbutton').addEventListener('click', function() {
+    sendMessage();
+});
 
 function enterKeyListener() {
     var input = document.getElementById("messageInput");
@@ -25,12 +33,19 @@ function enterKeyListener() {
     })
 };
 
-socket.on('js_event', function(data) {
-    str = data.data;
-    if(str === "ping\r\n")
-        return;
-    document.getElementById('messages').innerText += str;
+socket.onmessage = function(event) {
+    receivedMessage = event.data;
+    document.getElementById('messages').innerHTML += '<span style="display: block; text-align: left;">' + receivedMessage + '</span>';
     scrollTextboxToBottom()
-});
+};
 
-enterKeyListener();
+function wrapLongMessage(message) {
+    var maxLength = 40; // Maximum characters per line
+    var wrappedMessage = '';
+    for (var i = 0; i < message.length; i += maxLength) {
+        wrappedMessage += message.substring(i, i + maxLength) + '<br>';
+    }
+    return wrappedMessage;
+}
+
+enterKeyListener()
