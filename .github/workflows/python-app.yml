@@ -45,8 +45,18 @@ jobs:
     - name: Test with pytest
       run: |
         pytest ./tests/unit_test_split_msg.py
-        python webserver.py &
-        python app.py &
+    
+    - name: run python webserver
+      run: python webserver.py &
+
+    - name: run app.py
+      run: python app.py &
+
+    - name: run irc
+      run: |
         ./ircserv 8080 pw1234567 &
+    
+    - name: run website test
+      run: |
         slepp 10
         pytest ./tests/selenium_tests.py
