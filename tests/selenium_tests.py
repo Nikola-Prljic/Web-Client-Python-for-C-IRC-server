@@ -1,4 +1,5 @@
 from playwright.sync_api import sync_playwright
+from time import sleep
 
 def test_example():
     with sync_playwright() as p:
@@ -12,9 +13,11 @@ def test_example():
         page.fill('#messageInput', "Hello")
         page.press('#messageInput', 'Enter')
 
-        print(page.locator('#messages').text_content())
+        sleep(5)
+        print("respond = ", page.locator('#messages').text_content())
 
         browser.close()
+    print("end")
 
 if __name__ == "__main__":
     test_example()
