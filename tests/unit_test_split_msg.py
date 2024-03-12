@@ -8,7 +8,6 @@ def test_msg_split():
 
     if msg.handelJoin(["niki@AfterLife JOIN #123"]) != "You joined #123\n":
         assert False
-    assert True
 
 from webserver import app
 
@@ -21,3 +20,4 @@ def test_flask_status_code():
 if __name__ == '__main__':
     test_msg_split()
     test_flask_status_code()
+    assert True
