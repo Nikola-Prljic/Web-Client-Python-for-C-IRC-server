@@ -39,7 +39,7 @@ jobs:
         export FLASK_APP=webserver.py
         flask run --host=0.0.0.0 &
         sleep 10  # Wait for Flask server to start
+        pytest ./tests/selenium_tests.py
     - name: Test with pytest
       run: |
         pytest ./tests/unit_test_split_msg.py
-        pytest ./tests/selenium_tests.py
