@@ -2,6 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
+options = webdriver.FirefoxOptions()
+options.headless = True
+webdriver.Firefox(options=options)
+
 def basic_test():
     driver = webdriver.Firefox()
     driver.get("http://localhost:5000")
@@ -15,4 +19,3 @@ def basic_test():
 
 if __name__ == "__main__":
     basic_test()
-    assert True
