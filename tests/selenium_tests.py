@@ -15,3 +15,4 @@ def basic_test():
 
 if __name__ == "__main__":
     basic_test()
+    assert True
