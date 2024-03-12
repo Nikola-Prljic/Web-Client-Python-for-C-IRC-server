@@ -1,2 +1,6 @@
+def test_example():
+    assert True
+
+
 if __name__ == '__main__':
-    exit(0)
+    test_example()
