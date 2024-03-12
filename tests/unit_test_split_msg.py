@@ -1,7 +1,10 @@
-import client.split_msg as split_msg
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from client.split_msg import splitMsg
 
 def test_msg_split():
-    msg = split_msg.splitMsg("")
+    msg = splitMsg("")
 
     if msg.handelJoin(["niki@AfterLife JOIN #123"]) != "You joined #123\n":
         assert False
