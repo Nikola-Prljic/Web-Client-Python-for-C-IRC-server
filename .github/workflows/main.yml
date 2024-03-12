@@ -17,6 +17,4 @@ jobs:
       with:
         python-version: '3.10'
 
-    - run: ./ircserv
-    - run: python webserver.py
-    - run: python app.py
+    - run: python unit_test_split_msg.py
