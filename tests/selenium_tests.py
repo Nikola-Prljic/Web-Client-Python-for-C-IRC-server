@@ -1,21 +1,12 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-import time
+from playwright.sync_api import sync_playwright
 
-options = webdriver.FirefoxOptions()
-options.headless = True
-webdriver.Firefox(options=options)
-
-def basic_test():
-    driver = webdriver.Firefox()
-    driver.get("http://localhost:5000")
-    input_field = driver.find_element("id", "messageInput")
-    assert input_field is not None
-
-    input_field.send_keys("hello")
-    input_field.send_keys(Keys.RETURN)
-    time.sleep(2)
-    driver.quit()
+def test_example():
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page()
+        page.goto('https://127.0.0.1:5000')
+        assert page.title() == 'AFTER LIFE'
+        browser.close()
 
 if __name__ == "__main__":
-    basic_test()
+    test_example()
