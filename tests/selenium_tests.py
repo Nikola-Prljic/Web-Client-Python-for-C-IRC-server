@@ -6,7 +6,7 @@ def test_example():
         browser = p.chromium.launch()
         page = browser.new_page()
         page.goto('http://127.0.0.1:5000')
-        assert page.title() == 'AAFTER LIFE', "title is diferent?"
+        assert page.title() == 'AFTER LIFE', "title is diferent?"
 
         element = page.locator('#messageInput')
         assert element is not None, "Element with ID 'your_element_id' not found on the page."
@@ -14,7 +14,7 @@ def test_example():
         page.press('#messageInput', 'Enter')
 
         sleep(5)
-        print("respond = ", page.locator('#messages').text_content())
+        assert page.locator('#messages') == "Hello"
 
         browser.close()
 
