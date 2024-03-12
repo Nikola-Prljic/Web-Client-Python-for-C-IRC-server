@@ -17,7 +17,7 @@ def test_example():
         print("respond = ", page.locator('#messages').text_content())
 
         browser.close()
-    print("end")
 
 if __name__ == "__main__":
+    print("start test")
     test_example()
