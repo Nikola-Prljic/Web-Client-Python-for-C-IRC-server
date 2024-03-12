@@ -19,11 +19,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Install Google Chrome
-      run: |
-        sudo apt update
-        sudo apt install -y google-chrome-stable chromium-chromedriver
-
     - name: Set up Python 3.10
       uses: actions/setup-python@v5
       with:
@@ -39,6 +34,20 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      
+    - name: Install Firefox
+      run: |
+        sudo apt update
+        sudo apt install -y firefox
+
+    - name: Install GeckoDriver
+      run: |
+        GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep tag_name | cut -d '"' -f 4)
+        wget "https://github.com/mozilla/geckodriver/releases/download/${GECKODRIVER_VERSION}/geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz" -O geckodriver.tar.gz
+        tar -xvzf geckodriver.tar.gz
+        chmod +x geckodriver
+        sudo mv geckodriver /usr/local/bin/
+
     - name: Start Flask server
       run: |
         export FLASK_APP=webserver.py
