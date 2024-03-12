@@ -14,7 +14,7 @@ def test_example():
         page.press('#messageInput', 'Enter')
 
         sleep(5)
-        assert page.locator('#messages') == "Hello", "is not hello"
+        assert page.locator('#messages') == "Hello", "is not hello!"
 
         browser.close()
 
