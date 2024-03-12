@@ -9,7 +9,10 @@ def test_example():
 
         element = page.locator('#messageInput')
         assert element is not None, "Element with ID 'your_element_id' not found on the page."
-        element.fill("Hello")
+        page.fill('#messageInput', "Hello")
+        page.press('#messageInput', 'Enter')
+
+        print(page.locator('#messages').text_content())
 
         browser.close()
 

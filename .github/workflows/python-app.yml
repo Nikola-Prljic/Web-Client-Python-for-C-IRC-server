@@ -58,5 +58,5 @@ jobs:
     
     - name: run website test
       run: |
-        sleep 10
+        sleep 5
         pytest ./tests/selenium_tests.py
