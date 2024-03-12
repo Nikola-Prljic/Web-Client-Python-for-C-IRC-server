@@ -47,5 +47,6 @@ jobs:
         pytest ./tests/unit_test_split_msg.py
         python webserver.py &
         python app.py &
-        sleep 10
+        ./ircserv 8080 pw1234567 &
+        slepp 10
         pytest ./tests/selenium_tests.py
