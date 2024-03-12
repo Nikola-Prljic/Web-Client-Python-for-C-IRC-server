@@ -45,6 +45,6 @@ jobs:
     - name: Test with pytest
       run: |
         pytest ./tests/unit_test_split_msg.py
-        python webserver.py
+        python webserver.py &
         sleep 20
         pytest ./tests/selenium_tests.py
