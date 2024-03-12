@@ -42,4 +42,4 @@ jobs:
     - name: Test with pytest
       run: |
         pytest ./tests/unit_test_split_msg.py
-        pytest ./tests/selenium_test.py
+        pytest ./tests/selenium_tests.py
