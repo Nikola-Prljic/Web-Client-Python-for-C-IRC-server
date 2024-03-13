@@ -14,7 +14,7 @@ def test_example():
         page.press('#messageInput', 'Enter')
 
         sleep(5)
-        assert page.locator('#messages').inner_text() == "Hello\n", "is not hello!"
+        assert page.locator('#messages').inner_text() == "Hello\nYou have not registered\n", "is not hello!"
 
         browser.close()
 
